@@ -16,6 +16,8 @@ def check_events(ai_settings, screen, ship, bullets):
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
 	"""响应按键"""
+	if event.key == 27:
+		sys.exit()
 	if event.key == pygame.K_RIGHT:
 		# 飞船向右移动
 		ship.moving_right = True
@@ -23,9 +25,8 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
 		# 飞船向左移动
 		ship.moving_left = True
 	elif event.key == 0: # 这可能是个虚拟机或者python的bug，K_SPACE的值为32， 空格为0
-		# 子弹发射
-		new_bullet = Bullet(ai_settings, screen, ship)
-		bullets.add(new_bullet)
+		# 增加子弹
+		fire_bullet(bullets, ai_settings, screen, ship)
 
 def check_keyup_events(event, ship):
 	if event.key == pygame.K_RIGHT:
@@ -48,3 +49,18 @@ def update_screen(ai_settings, screen, ship, bullets):
 	
 	# 让最近绘制的屏幕可见
 	pygame.display.flip()
+
+def update_bullet(bullets):
+	"""更新子弹函数"""
+	bullets.update()
+	
+	# 删除已经出界了的子弹实例
+	for bullet in bullets.copy():
+		if bullet.rect.bottom <= 0:
+			bullets.remove(bullet)
+		
+def fire_bullet(bullets, ai_settings, screen, ship):
+	# 子弹发射
+	if len(bullets) < ai_settings.bullet_allow:
+		new_bullet = Bullet(ai_settings, screen, ship)
+		bullets.add(new_bullet)
