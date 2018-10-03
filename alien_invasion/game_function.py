@@ -6,7 +6,7 @@ from time import sleep
 from bullet import Bullet
 from alien import Alien
 
-def check_events(ai_settings, screen, ship, bullets):
+def check_events(ai_settings, screen, stats, play_button, ship, bullets):
 	# 监听键盘和鼠标事件
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -15,6 +15,14 @@ def check_events(ai_settings, screen, ship, bullets):
 			check_keydown_events(event, ai_settings, screen, ship, bullets)
 		elif event.type == pygame.KEYUP:
 			check_keyup_events(event, ship)
+		elif event.type == pygame.MOUSEBUTTONDOWN:
+			mouse_x, mouse_y = pygame.mouse.get_pos()
+			check_play_button(stats, play_button, mouse_x, mouse_y)
+
+def check_play_button(stats, play_button, mouse_x, mouse_y):
+	"""在玩家点击了开始时开始游戏"""
+	if play_button.rect.collidepoint(mouse_x, mouse_y):
+		stats.game_active = True
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
 	"""响应被外星人撞到的飞船"""
@@ -56,7 +64,8 @@ def check_keyup_events(event, ship):
 		# 停止飞船向左移动
 		ship.moving_left = False
 
-def update_screen(ai_settings, screen, ship, aliens, bullets):
+def update_screen(ai_settings, screen, stats, ship, aliens, bullets,
+		play_button):
 	"""更新屏幕函数"""
 	# 设置背景颜色
 	screen.fill(ai_settings.bg_color)
@@ -69,6 +78,10 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 
 	# 绘制外星人
 	aliens.draw(screen)
+
+	# 如果游戏处于非激活状态，就绘制play按钮
+	if not stats.game_active:
+		play_button.draw_button()
 	
 	# 让最近绘制的屏幕可见
 	pygame.display.flip()
