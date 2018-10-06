@@ -70,3 +70,52 @@
     # 生成一个1-10的平方列表
     squares = [value**2 for value in range(1, 11)]
     ```
+    
+## 5. `if` 语句
+1. 一般用法：
+    ```
+    if statement:
+        //条件一
+    else:
+        //默认条件
+    
+    if statement:
+        //条件一
+    elif statement:
+        //条件二
+    else:
+        //默认条件
+    ```
+2. boolean表达式：
+    1. True
+    2. False
+    3. （真别扭， 大写开头）
+
+## 6. 字典
+> 和Java中的Map类似， 使用键值对来关联索引和数据
+1. Python中的字典使用 `{key:value, key:value, ...}` 来表示
+2. 增删改查字典中的内容
+    1. 增加
+        1. `dict_name[new_key] = new_value`
+    2. 删除
+        1. `del dict_name[key]`
+    3. 修改
+        1. `dict_name[key] = new_value`
+    4. 查找
+        1. `dict_name[key]`
+3. 结合 `for` 循环遍历字典
+    ```
+    # 循环遍历键-值
+    for key, value in dict_name.items():
+        print(str(key) + ':' + str(value))
+    
+    # 循环遍历键
+    for key in dict_name.keys():
+        print(str(key))
+        
+    # 循环遍历值
+    for value in dict_name.values():
+        print(str(value))
+    ```
+    * 可以使用 `set(dict_name)` 来创建一个没有重复内容的集合。
+4. **好好利用列表和字典的嵌套~** 能够组成一个复杂的数据结构。
