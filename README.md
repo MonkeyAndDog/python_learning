@@ -200,6 +200,12 @@
                 print(str(key) + str(value))
         ```
 3. 将函数存储在模块中：
-    1. 模块是扩展名为.py的文件。例如文件名为 `file_name.py` 那么导入模块： `import file_name` 。
-
-    
+    1. 模块是扩展名为.py的文件。
+        1. 例如文件名为 `file_name.py` 那么导入模块： `import file_name` 。
+        2. 导入模块中的指定类： `from module_name import func_name_1, func_name_2` 。
+        3. 导入模块后起别名： `from module_name import func_name as mf` 。
+        4. 导入所有函数： `from module_name import *` 。
+    2. 导入模块之后的后续操作：
+        1. 使用模块中的方法： `module_name.func_name(params)` 。
+        2. 使用别名之后的调用方法： `mf(params)` 。
+  
