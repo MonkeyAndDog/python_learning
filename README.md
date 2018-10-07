@@ -209,3 +209,25 @@
         1. 使用模块中的方法： `module_name.func_name(params)` 。
         2. 使用别名之后的调用方法： `mf(params)` 。
   
+## 9. 类
+1. 类的声明：
+    > 一定要写好 `__init__(self, params...)` 方法，方法中要带上 `self` 参数才能访问当前对象。
+    ```
+    class class_name(super_class_name):
+        def __init__(self, params...):
+            # 初始化方法
+        def func_name(self, params...):
+            # 自定义方法
+    ```
+2. 类的实例化：
+    ```
+    variable_name = class_name(init_params...)
+    ```
+3. 访问类的方法和属性
+    > 和Java相同的 `.` 访问方式
+4. 导入类
+    ```
+    from module_name import class_name
+    ```
+5. 类编码风格
+    > 驼峰 + 下划线混合方式
