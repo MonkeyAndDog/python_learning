@@ -72,19 +72,21 @@
     ```
     
 ## 5. `if` 语句
-1. 一般用法：
+1. 用法：
     ```
+    # if-else格式
     if statement:
-        //条件一
+        # 条件一
     else:
-        //默认条件
+        # 默认条件
     
+    # if-elif-else格式
     if statement:
-        //条件一
+        # 条件一
     elif statement:
-        //条件二
+        # 条件二
     else:
-        //默认条件
+        # 默认条件
     ```
 2. boolean表达式：
     1. True
@@ -119,3 +121,85 @@
     ```
     * 可以使用 `set(dict_name)` 来创建一个没有重复内容的集合。
 4. **好好利用列表和字典的嵌套~** 能够组成一个复杂的数据结构。
+
+## 7. 用户输入和 `while` 循环
+1. 用户输入：
+    1. Python中使用 `input()` 函数完成对用户输入的读取和操作。例如： 
+        ```
+        name = input("请输入你的姓名：")
+        print("hello, " + name)
+        ```
+2. `while` 循环：
+    1. 用法：
+        ```
+        # 基本的用法
+        while statement:
+            # 条件符合时执行的内容
+            
+        # 使用标志位用法
+        active = True
+        while active:
+            # 当active == True时执行的内容
+        ```
+    2. 使用 `break` 跳出循环。
+    3. 使用 `continue` 来跳过本次循环。（其实与Java、 C、 C++、 JavaScript中功能一样）
+
+## 8. 函数
+1. 用法：
+    > 声明函数 -> 调用函数。
+    ```
+    # 声明简单函数
+    def func_name(params):
+        # 函数体
+    
+    # 调用函数
+    func_name(params)
+    
+    # 声明有返回值的函数
+    def func_name(params):
+        # 函数体
+        return data
+    
+    # 调用有返回值的函数
+    data = func_name(params)
+    ```
+2. Python中函数参数的那些事：
+    1. 位置实参：根据函数声明中的位置来确定每个参数。在位置实参中顺序很重要。
+    2. 关键字实参：根据声明的形参名称来确定实参位置。此时位置就没那么重要。如：
+        ```
+        # 声明
+        func_name(param1, param2)
+        
+        # 调用
+        func_name(param1=data1, param2=data2)
+        ```
+    3. 默认值：在函数声明时就给了参数的可能值。如：
+        ```
+        # 声明
+        func_name(param1, param2=data)
+        
+        # 调用
+        func_name(data1, data2)
+        func_name(data1)
+        func_name(param1=data1, param2=data2)
+        ```
+        * 这时候可以灵活应用使得参数成为可选的参数。
+    4. 任意数量的实参：事先不知道需要多少参数，但是Python可以从调用函数中推算出参数的数量。如：
+        ```
+        # 声明
+        def func_name(*params):
+            for param in params:
+                print(param)
+            # 函数体
+        ```
+    5. 任意数量的关键字实参：接受一种键值对来完成参数的匹配，就是字典。如：
+        ```
+        # 声明
+        def func_name(**params_map):
+            for key, value in params_map:
+                print(str(key) + str(value))
+        ```
+3. 将函数存储在模块中：
+    1. 模块是扩展名为.py的文件。例如文件名为 `file_name.py` 那么导入模块： `import file_name` 。
+
+    
