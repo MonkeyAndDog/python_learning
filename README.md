@@ -231,3 +231,37 @@
     ```
 5. 类编码风格
     > 驼峰 + 下划线混合方式
+
+## 10. 文件和异常
+1. 打开文件并处理文件内容
+    1. 打开方式： `w/r/a/r+` 四种方式。分别对应：写/读/追加/写并且读四种方式。
+    2. 打开函数： Python中使用 `open(file_name) as obj_name` 来打开一个文件， 并作为一个文件对象 `obj_name` 。
+    3. 写入文件内容：
+        ```
+        with open(file_name, 'w') as file_object:
+            file_object.write(content)
+        ```
+    4. 读取内容然后按照行去处理：
+        ```
+        with open(file_name, 'r') as file_object:
+            lines = file_object.readlines()
+            for line in lines:
+                print(line)
+        ```
+2. 异常
+    > 就是try - catch - else代码块
+    1. 示例：处理 `ZeroDivisionError` 异常：
+        ```
+        try:
+            print(5/0)
+        except ZeroDivisionError:
+            print("您搞出了一个无限大数")
+        ```
+    2. 依赖 `try` 代码块正常执行的代码都应该放到 `else` 代码块中。
+    3. `FileNotFoundError` 异常。
+3. 读取解析 `json` 文件
+    1. `json.dump(content, file_name)` , 将content内容json格式化之后写入file_name中。
+    2. `json_object = json.load(file_object)` ，读取指定文件对象，并返回一个json对象。
+
+---
+时：2018年10月10日16点45分
