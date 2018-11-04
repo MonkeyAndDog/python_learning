@@ -107,3 +107,4 @@ venv.bak/
 .idea/
 *.iml
 simple_code_generator/java/
+sample_code/
