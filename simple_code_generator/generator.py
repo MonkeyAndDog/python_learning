@@ -4,7 +4,6 @@
 """
 
 from pathlib import Path
-import re
 
 
 def generator(dir_input):
@@ -36,6 +35,48 @@ def generator(dir_input):
 c_dir = Path()
 
 # 读取模板文件
+str_template = """
+package com.tccloud.webserver.dao.impl;\n
+\n
+import {package_name}.dao.{dao_name};\n
+import {package_name}.model.{model_name};\n
+\n
+import org.springframework.orm.hibernate5.HibernateTemplate;\n
+import org.springframework.stereotype.Component;\n
+import javax.annotation.Resource;\n
+import java.util.List;\n
+\n
+@Component("{component_name}")\n
+public class {dao_name}Impl implements {dao_name} {\n
+\n
+    private HibernateTemplate hibernateTemplate;\n
+\n
+    public void save({model_name} {lower_case_model_name}) {\n
+        hibernateTemplate.save({lower_case_model_name});\n
+    }\n
+
+    public void delete({model_name} {lower_case_model_name}) {\n
+\n
+    }\n
+\n
+    public User get({model_name} {lower_case_model_name}) {\n
+        return null;\n
+    }\n
+\n
+    public List<{model_name}> get{model_name}s() {\n
+        return null;\n
+    }\n
+\n
+    public HibernateTemplate getHibernateTemplate() {\n
+        return hibernateTemplate;\n
+    }\n
+\n
+    @Resource\n
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {\n
+        this.hibernateTemplate = hibernateTemplate;\n
+    }\n
+}\n
+"""
 template_file = open("template.java")
 fill_obj = {
     'package_name': 'com.tccloud.webserver',
@@ -45,19 +86,21 @@ fill_obj = {
     'lower_case_model_name': 'user'
 }
 result_content = ""
-while True:
-    read_content = template_file.readline()
-    if not read_content:
-        break
-    if read_content.endswith("{\n"):
+read_contents = str_template.split("\n")
+space = 0
+for read_content in read_contents:
+    if read_content == "":
+        result_content += "\n"
+    if read_content.endswith("{"):
         result_content += read_content[0:-2].format(**fill_obj)
-        result_content += "{\n"
+        result_content += "{"
         continue
-    if read_content.endswith("}\n"):
+    if read_content.endswith("}"):
         result_content += read_content
         continue
     else:
         result_content += read_content.format(**fill_obj)
 
+# noinspection PyUnreachableCode
 wr_code = open("template_generate.java", mode="w", encoding="utf-8")
 wr_code.write(result_content)
