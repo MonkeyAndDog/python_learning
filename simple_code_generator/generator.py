@@ -35,6 +35,10 @@ c_dir = Path()
 
 # Dao层模板字符串
 str_template_out = """
+/**
+ * 该代码为自动生成
+ *
+ */
 package {package_name}.{level}.impl;\n
 
 import {package_name}.dao.{dao_name};\n
@@ -78,7 +82,11 @@ public class {dao_name}Impl implements {dao_name} {\n
 """
 
 # Dao层模板字符串
-str_template_dao = """package {package_name}.{level};\n
+str_template_dao = """/**\n
+ * 该代码为自动生成\n
+ *\n
+ */\n
+package {package_name}.{level};\n
 
 import {package_name}.model.{model_name};\n
 
