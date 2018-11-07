@@ -1,52 +1,34 @@
+package com.tccloud.webserver.service;
 
-package com.tccloud.webserver.dao.impl;
-
-
-import com.tccloud.webserver.dao.UserDao;
 import com.tccloud.webserver.model.User;
 
+public interface UserService{
 
-import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.stereotype.Component;
-import javax.annotation.Resource;
-import java.util.List;
+    /**
+     * 持久化User对象
+     * @param user 要持久化的User对象
+     */
+    void save(User user);
 
+    /**
+     * 从数据库中删除掉User对象
+     * @param user 要删除的User对象副本
+     */
+    void delete(User user);
 
-@Component("userDao")
-public class UserDaoImpl implements UserDao{
+    /**
+     * 从数据库中获取类似的User对象
+     * @param user 要获取的User对象的副本
+     * @return 从数据库中获取到的User对象
+     */
+    User get(User user);
 
-
-    private HibernateTemplate hibernateTemplate;
-
-
-    public void save(User user){
-        hibernateTemplate.save(user);
-    }
-
-    public void delete(User user){
-
-
-    }
-
-
-    public User get(User user){
-        return null;
-    }
-
-
-    public List<User> getUsers(){
-        return null;
-    }
-
-
-    public HibernateTemplate getHibernateTemplate(){
-        return hibernateTemplate;
-    }
-
-
-    @Resource
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate){
-        this.hibernateTemplate = hibernateTemplate;
-    }
+    /**
+     * 根据提供的信息更新指定{model_name}
+     * @param user 要查询的{model_name}
+     * @return 返回跟新前的对象
+     */
+    User update(User user);
 }
+
 
