@@ -102,7 +102,7 @@ public interface {model_name}Dao {\n
      * 获取符合指定查询条件的{model_name}对象\n
      * @return 从数据库中获取到的{model_name}对象\n
      */\n
-    User get({model_name} {lower_case_model_name});\n
+    {model_name} get({model_name} {lower_case_model_name});\n
 
     /**\n
      * 获取指定查询范围内的{model_name}对象\n
@@ -147,7 +147,7 @@ public interface {model_name}Service {\n
 
 """
 # 读取模板文件方式
-template_file_out = open("template.java")
+# template_file_out = open("template.java")
 
 # 填充字段字典
 fill_obj_out = {
@@ -161,8 +161,10 @@ fill_obj_out = {
 
 
 # 使用字符串模式生成代码
-def generate_by_string_template(str_template, fill_obj, generate_file_object):
+def generate_by_string_template(str_template=str_template_dao, fill_obj=None, generate_file_object="temp"):
     # 读字符串方式初始化模板代码
+    if fill_obj is None:
+        fill_obj = fill_obj_out
     read_contents = str_template.split("\n")
     result_content = ""
     for read_content in read_contents:
@@ -205,5 +207,5 @@ def generate_by_template_file(file_name, fill_obj, generate_file_object):
     wr_code.write(result_content)
 
 
-generate_by_string_template(str_template_service, fill_obj_out, "template_generate.java")
-generate_by_template_file("template.java", fill_obj_out, "template_2.java")
+# generate_by_string_template(str_template_service, fill_obj_out, "template_generate.java")
+# generate_by_template_file("template.java", fill_obj_out, "template_2.java")

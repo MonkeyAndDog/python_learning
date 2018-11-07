@@ -4,6 +4,7 @@
 """
 
 from pathlib import Path
+from simple_code_generator import generator
 
 current_dir = Path()
 models = []
@@ -41,5 +42,10 @@ def get_package_name(file_name):
 
 
 load_models(current_dir)
-print(models)
-print(fill_objs)
+for fill in fill_objs:
+    file_name = fill.get('dao_name') + ".java"
+    generator_path = Path(".\\dao\\").absolute()
+    if not generator_path.exists():
+        generator_path.mkdir()
+    generator.generate_by_string_template(fill_obj=fill, generate_file_object=str(generator_path) + "\\" + file_name)
+    print("在" + str(generator_path) + file_name + "生成了：" + file_name)
